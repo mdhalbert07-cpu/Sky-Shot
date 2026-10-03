@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sky Shot">
+    <meta name="theme-color" content="#0B1B36">
+    <meta name="format-detection" content="telephone=no">
+    <title>Sky Shot</title>
+    <meta name="description" content="Drop a basketball from 2,500 ft. Read the wind. Make the shot.">
+    <!-- Share metadata: the owner shares this link with friends (Open Graph / Twitter; the image URL must be absolute). -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sky Shot">
+    <meta property="og:title" content="Sky Shot — One Ridiculous Shot">
+    <meta property="og:description" content="Drop a basketball from 2,500 ft. Read the wind. Make the shot.">
+    <meta property="og:url" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/">
+    <meta property="og:image" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Sky Shot: a basketball falling 2,500 ft toward a tiny park court far below.">
+    <meta property="og:image:type" content="image/png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sky Shot — One Ridiculous Shot">
+    <meta name="twitter:description" content="Drop a basketball from 2,500 ft. Read the wind. Make the shot.">
+    <meta name="twitter:image" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/share.png">
+    <meta name="twitter:image:alt" content="Sky Shot: a basketball falling 2,500 ft toward a tiny park court far below.">
+    <link rel="apple-touch-icon" sizes="180x180" href="TemplateData/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="180x180" href="TemplateData/apple-touch-icon.png">
+    <style>
+      /* Barlow Condensed ExtraBold, SIL Open Font License 1.1 (TemplateData/OFL.txt). */
+      @font-face {
+        font-family: "Barlow Condensed";
+        font-weight: 800;
+        font-style: normal;
+        font-display: block;
+        src: url("TemplateData/BarlowCondensed-ExtraBold.ttf") format("truetype");
+      }
+
+      :root {
+        --navy: #0B1B36;
+        --navy-2: #16305A;
+        --cyan: #38E1FF;
+        --border: #7FD8FF;
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--navy);
+        overscroll-behavior: none;
+        touch-action: none;
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        position: fixed;
+        inset: 0;
+        font-family: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+        font-weight: 800;
+        color: #fff;
+      }
+
+      /* Phones: the game fills the whole screen (below the status bar when launched from the home screen). */
+      #frame {
+        position: fixed;
+        top: env(safe-area-inset-top, 0px);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: calc(100vh - env(safe-area-inset-top, 0px));
+        height: calc(100dvh - env(safe-area-inset-top, 0px));
+        overflow: hidden;
+        background: var(--navy);
+      }
+
+      #unity-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+        outline: none;
+        touch-action: none;
+        background: var(--navy);
+      }
+
+      /* Desktop / landscape: a centered portrait phone (9 : 19.5) so the preview frames like an iPhone. */
+      @media (min-aspect-ratio: 1/1) and (hover: hover) and (pointer: fine) {
+        body {
+          background:
+            radial-gradient(1200px 700px at 50% 0%, #1d4f8f 0%, rgba(29, 79, 143, 0) 70%),
+            linear-gradient(180deg, #102a52 0%, #071225 100%);
+        }
+        #frame {
+          top: 50%;
+          left: 50%;
+          right: auto;
+          bottom: auto;
+          height: min(92vh, 92dvh);
+          width: calc(min(92vh, 92dvh) * 9 / 19.5);
+          transform: translate(-50%, -50%);
+          border-radius: 46px;
+          border: 10px solid #050c19;
+          box-shadow: 0 0 0 2px #2a4570, 0 30px 80px rgba(0, 0, 0, 0.55);
+        }
+        #frame::after {
+          /* The Dynamic Island, purely decorative. */
+          content: "";
+          position: absolute;
+          top: 1.4%;
+          left: 50%;
+          width: 30%;
+          height: 2.6%;
+          transform: translateX(-50%);
+          border-radius: 999px;
+          background: #000;
+          pointer-events: none;
+          z-index: 5;
+        }
+      }
+
+      .overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+      }
+
+      /* ---- loading screen ---- */
+      #loader {
+        background:
+          radial-gradient(120% 60% at 50% 18%, #1f4f8c 0%, rgba(31, 79, 140, 0) 70%),
+          linear-gradient(180deg, #12305c 0%, var(--navy) 55%, #071226 100%);
+        transition: opacity 0.35s ease;
+      }
+      #loader.done { opacity: 0; pointer-events: none; }
+
+      .wordmark {
+        display: flex;
+        gap: 0.18em;
+        font-size: clamp(56px, 19vw, 132px);
+        line-height: 0.9;
+        letter-spacing: 0.01em;
+        text-shadow: 0 6px 0 rgba(0, 0, 0, 0.28), 0 0 34px rgba(56, 225, 255, 0.28);
+      }
+      .wordmark .shot { color: var(--cyan); }
+      #frame .wordmark { font-size: clamp(44px, 15vmin, 120px); }
+
+      .tagline {
+        margin-top: 14px;
+        font-size: clamp(15px, 4.2vmin, 24px);
+        letter-spacing: 0.32em;
+        color: var(--cyan);
+        opacity: 0.9;
+      }
+
+      .progress {
+        margin-top: 9vh;
+        width: min(62%, 320px);
+        height: 12px;
+        border-radius: 999px;
+        background: rgba(10, 24, 48, 0.9);
+        border: 2px solid rgba(127, 216, 255, 0.55);
+        box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45);
+        overflow: hidden;
+      }
+      .progress .fill {
+        width: 0%;
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #2E8FD0 0%, var(--cyan) 100%);
+        box-shadow: 0 0 14px rgba(56, 225, 255, 0.75);
+        transition: width 0.2s ease;
+      }
+      .percent {
+        margin-top: 10px;
+        font-size: clamp(14px, 3.6vmin, 20px);
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.75);
+      }
+
+      /* No tap-to-start overlay: the game's own title screen has PLAY, the only start tap (it also unlocks audio). */
+
+      /* ---- rotate hint (phones held sideways) and errors ---- */
+      #rotate, #error { display: none; background: var(--navy); text-align: center; padding: 24px; box-sizing: border-box; z-index: 6; }
+      #rotate .big, #error .big { font-size: clamp(28px, 8vmin, 48px); letter-spacing: 0.06em; }
+      #rotate .small, #error .small {
+        margin-top: 12px;
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.8);
+        max-width: 420px;
+      }
+      #error button {
+        margin-top: 22px;
+        padding: 12px 28px;
+        border-radius: 999px;
+        border: 2px solid var(--border);
+        background: var(--navy-2);
+        color: #fff;
+        font: inherit;
+        font-size: 22px;
+        letter-spacing: 0.08em;
+      }
+      @media (orientation: landscape) and (hover: none) and (pointer: coarse) {
+        #rotate { display: flex; }
+      }
+
+      #toast {
+        position: absolute;
+        left: 50%;
+        bottom: 6%;
+        transform: translateX(-50%);
+        max-width: 86%;
+        padding: 10px 16px;
+        border-radius: 14px;
+        background: rgba(11, 27, 54, 0.92);
+        border: 2px solid rgba(127, 216, 255, 0.6);
+        font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+        font-weight: 600;
+        font-size: 13px;
+        display: none;
+        z-index: 7;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="frame">
+      <canvas id="unity-canvas" tabindex="-1"></canvas>
+
+      <div id="loader" class="overlay">
+        <div class="wordmark"><span>SKY</span><span class="shot">SHOT</span></div>
+        <div class="tagline">ONE RIDICULOUS SHOT &middot; 2,500 FT</div>
+        <div class="progress"><div class="fill" id="progress-fill"></div></div>
+        <div class="percent" id="progress-text">LOADING 0%</div>
+      </div>
+
+      <div id="rotate" class="overlay">
+        <div class="big">TURN YOUR PHONE UPRIGHT</div>
+        <div class="small">Sky Shot is a portrait game.</div>
+      </div>
+
+      <div id="error" class="overlay">
+        <div class="big">SOMETHING WENT WRONG</div>
+        <div class="small" id="error-text"></div>
+        <button type="button" onclick="location.reload()">RELOAD</button>
+      </div>
+
+      <div id="toast"></div>
+    </div>
+
+    <script>
+      (function () {
+        "use strict";
+
+        // ---- iOS audio unlock: remember every AudioContext the engine creates, resume them inside a tap. The title
+        // screen's PLAY is the first tap a player makes, so PLAY unlocks web audio (the document listeners below).
+        var NativeAudioContext = window.AudioContext || window.webkitAudioContext;
+        var audioContexts = [];
+        if (NativeAudioContext) {
+          var TrackedAudioContext = function (options) {
+            var context = options !== undefined ? new NativeAudioContext(options) : new NativeAudioContext();
+            audioContexts.push(context);
+            return context;
+          };
+          TrackedAudioContext.prototype = NativeAudioContext.prototype;
+          window.AudioContext = TrackedAudioContext;
+          if (window.webkitAudioContext) window.webkitAudioContext = TrackedAudioContext;
+        }
+        function unlockAudio() {
+          audioContexts.forEach(function (context) {
+            try {
+              if (context.state !== "running" && context.resume) context.resume();
+              var buffer = context.createBuffer(1, 1, 22050);
+              var source = context.createBufferSource();
+              source.buffer = buffer;
+              source.connect(context.destination);
+              source.start(0);
+            } catch (e) { /* a closed context: nothing to unlock */ }
+          });
+        }
+
+        // ---- no page scroll, bounce, pinch or double-tap zoom: every touch belongs to the game.
+        var blockDefault = function (e) { if (e.cancelable) e.preventDefault(); };
+        document.addEventListener("touchmove", blockDefault, { passive: false });
+        document.addEventListener("gesturestart", blockDefault, { passive: false });
+        document.addEventListener("gesturechange", blockDefault, { passive: false });
+        document.addEventListener("dblclick", blockDefault, { passive: false });
+        document.addEventListener("contextmenu", blockDefault);
+
+        var canvas = document.getElementById("unity-canvas");
+        var loader = document.getElementById("loader");
+        var fill = document.getElementById("progress-fill");
+        var percent = document.getElementById("progress-text");
+        var toast = document.getElementById("toast");
+        var toastTimer = 0;
+
+        function showBanner(message, type) {
+          if (type === "error") { showError(message); return; }
+          toast.textContent = String(message).replace(/<[^>]*>/g, "");
+          toast.style.display = "block";
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(function () { toast.style.display = "none"; }, 5000);
+        }
+
+        function showError(message) {
+          document.getElementById("error-text").textContent = String(message).replace(/<[^>]*>/g, "");
+          document.getElementById("error").style.display = "flex";
+          loader.classList.add("done");
+        }
+
+        function setProgress(p) {
+          var value = Math.max(0, Math.min(1, p));
+          fill.style.width = (value * 100).toFixed(1) + "%";
+          percent.textContent = value >= 1 ? "STARTING" : "LOADING " + Math.round(value * 100) + "%";
+        }
+
+        // Every tap resumes the engine's audio inside the user gesture iOS requires: the title's PLAY tap is the first one,
+        // and any later tap also resumes a context created afterwards (or one Safari suspended in the background).
+        document.addEventListener("touchend", unlockAudio, { passive: true });
+        document.addEventListener("click", unlockAudio);
+        window.skyShotUnlockAudio = unlockAudio;
+
+        var config = {
+          arguments: [],
+          dataUrl: "Build/WebPreview.data.unityweb",
+          frameworkUrl: "Build/WebPreview.framework.js.unityweb",
+          codeUrl: "Build/WebPreview.wasm.unityweb",
+          streamingAssetsUrl: "StreamingAssets",
+          companyName: "DefaultCompany",
+          productName: "SkyShot",
+          productVersion: "0.1.0",
+          showBanner: showBanner,
+          // Sharp on a Retina phone without paying for 3x: cap the backing store at 2x the CSS size.
+          devicePixelRatio: Math.min(window.devicePixelRatio || 1, 2),
+        };
+
+        var script = document.createElement("script");
+        script.src = "Build/WebPreview.loader.js";
+        script.onload = function () {
+          createUnityInstance(canvas, config, setProgress).then(function () {
+            setProgress(1);
+            loader.classList.add("done");   // a loading screen only: the game opens on its title screen
+            try { canvas.focus({ preventScroll: true }); } catch (err) { canvas.focus(); }
+          }).catch(function (message) {
+            showError(message);
+          });
+        };
+        script.onerror = function () {
+          showError("The game files could not be downloaded. Check the connection and reload.");
+        };
+        document.body.appendChild(script);
+      })();
+    </script>
+  </body>
+</html>
