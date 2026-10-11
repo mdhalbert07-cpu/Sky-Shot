@@ -10,7 +10,7 @@
     <meta name="theme-color" content="#0B1B36">
     <meta name="format-detection" content="telephone=no">
     <title>SKY SHOT · NEW VERSION (TEST)</title>
-    <meta name="skyshot-version" content="NEXT · 2026-10-11 17:11">
+    <meta name="skyshot-version" content="NEXT · 2026-10-11 17:37">
     <meta name="description" content="Join the crew. Make trick shots from the backyard to the skyline.">
     <!-- Share metadata: the owner shares this link with friends (Open Graph / Twitter; the image URL must be absolute). -->
     <meta property="og:type" content="website">
@@ -242,7 +242,7 @@
 </head>
   <body>
     <div id="frame">
-      <div id="skyshot-next-build" aria-label="SKY SHOT · NEW VERSION (TEST)" data-build-version="NEXT · 2026-10-11 17:11" style="position:absolute;left:0;right:0;bottom:0;height:calc(20px + env(safe-area-inset-bottom,0px));box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);z-index:8;pointer-events:none;text-align:center;background:#0B1B36;color:#38E1FF;font:700 10px/20px Arial,sans-serif;letter-spacing:.3px;">NEXT · 2026-10-11 17:11 · TEST</div>
+      <div id="skyshot-next-build" aria-label="SKY SHOT · NEW VERSION (TEST)" data-build-version="NEXT · 2026-10-11 17:37" style="position:absolute;left:0;right:0;bottom:0;height:calc(20px + env(safe-area-inset-bottom,0px));box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);z-index:8;pointer-events:none;text-align:center;background:#0B1B36;color:#38E1FF;font:700 10px/20px Arial,sans-serif;letter-spacing:.3px;">NEXT · 2026-10-11 17:37 · TEST</div>
       <canvas id="unity-canvas" tabindex="-1"></canvas>
 
       <div id="loader" class="overlay">
@@ -340,9 +340,9 @@
 
         var config = {
           arguments: [],
-          dataUrl: "Build/5e50ff5de9c0576ff6d3f1d53b69d7ff.data.unityweb",
-          frameworkUrl: "Build/6e35992806f2a6fd055a143863847251.framework.js.unityweb",
-          codeUrl: "Build/f196daf138a9f7f4674f9f6f95022334.wasm.unityweb",
+          dataUrl: "Build/f88765712766b8db088c35da7a91598f.data.unityweb",
+          frameworkUrl: "Build/5a5da6d745358ca23b343fac6885ae98.framework.js.unityweb",
+          codeUrl: "Build/887c6ee893540155c20df64945e6cd28.wasm.unityweb",
           streamingAssetsUrl: "StreamingAssets",
           companyName: "DefaultCompany",
           productName: "SKY SHOT · SHOT LAB",
@@ -353,7 +353,7 @@
         };
 
         var script = document.createElement("script");
-        script.src = "Build/522c2d2c6e729c5a67545557ee21fd4d.loader.js";
+        script.src = "Build/5bef181d9c2dff0edc89f7d38c1735c7.loader.js";
         script.onload = function () {
           createUnityInstance(canvas, config, setProgress).then(function () {
             setProgress(1);
