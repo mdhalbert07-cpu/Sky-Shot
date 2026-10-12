@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
+<script>if(new URLSearchParams(location.search).get("plain")==="1")location.replace("previous.html"+location.search);</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,14 +11,14 @@
     <meta name="theme-color" content="#0B1B36">
     <meta name="format-detection" content="telephone=no">
     <title>SKY SHOT · NEW VERSION (TEST)</title>
-    <meta name="skyshot-version" content="NEXT · 2026-10-12 13:45">
+    <meta name="skyshot-version" content="NEXT · 2026-10-12 15:17">
     <meta name="description" content="Make trick shots from the backyard to the skyline.">
     <!-- Share metadata: the owner shares this link with friends (Open Graph / Twitter; the image URL must be absolute). -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Sky Shot">
     <meta property="og:title" content="SKY SHOT · NEW VERSION (TEST)">
     <meta property="og:description" content="Make trick shots from the backyard to the skyline.">
-    <meta property="og:url" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/fun/?fun=1">
+    <meta property="og:url" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/next/">
     <meta property="og:image" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/share.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -242,7 +243,7 @@
 </head>
   <body>
     <div id="frame">
-      <div id="skyshot-next-build" aria-label="SKY SHOT · NEW VERSION (TEST)" data-build-version="NEXT · 2026-10-12 13:45" style="position:absolute;left:0;right:0;bottom:0;height:calc(20px + env(safe-area-inset-bottom,0px));box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);z-index:8;pointer-events:none;text-align:center;background:#0B1B36;color:#38E1FF;font:700 10px/20px Arial,sans-serif;letter-spacing:.3px;">NEXT · 2026-10-12 13:45 · TEST</div>
+      <div id="skyshot-next-build" aria-label="SKY SHOT · NEW VERSION (TEST)" data-build-version="NEXT · 2026-10-12 15:17" style="position:absolute;left:0;right:0;bottom:0;height:calc(20px + env(safe-area-inset-bottom,0px));box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);z-index:8;pointer-events:none;text-align:center;background:#0B1B36;color:#38E1FF;font:700 10px/20px Arial,sans-serif;letter-spacing:.3px;">NEXT · 2026-10-12 15:17 · TEST</div>
       <canvas id="unity-canvas" tabindex="-1"></canvas>
 
       <div id="loader" class="overlay">
@@ -340,9 +341,9 @@
 
         var config = {
           arguments: [],
-          dataUrl: "Build/1f2b7035b931184ad1c2af6adc0c788a.data.unityweb",
-          frameworkUrl: "Build/990213b01f68928a68c098f1a1dbc652.framework.js.unityweb",
-          codeUrl: "Build/fbe5e40ca4706075c7cd7596f005092a.wasm.unityweb",
+          dataUrl: "Build/9444743ffd99f979425be198aabd4f1a.data.unityweb",
+          frameworkUrl: "Build/0f29bc95fa241760786043d6fab87da1.framework.js.unityweb",
+          codeUrl: "Build/e0c7b05142e18b3edc16188ff73874c7.wasm.unityweb",
           streamingAssetsUrl: "StreamingAssets",
           companyName: "DefaultCompany",
           productName: "SKY SHOT · SHOT LAB",
@@ -353,7 +354,7 @@
         };
 
         var script = document.createElement("script");
-        script.src = "Build/ac0297cb14510a218fe9d94869387d67.loader.js";
+        script.src = "Build/4176bb1c56d3e95d3df04aa73091f5eb.loader.js";
         script.onload = function () {
           createUnityInstance(canvas, config, setProgress).then(function () {
             setProgress(1);
