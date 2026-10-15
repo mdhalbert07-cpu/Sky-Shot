@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-<script>if(new URLSearchParams(location.search).get("plain")==="1")location.replace("previous.html"+location.search);</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="SKY SHOT · NEW VERSION (TEST)">
+    <meta name="apple-mobile-web-app-title" content="Sky Shot">
     <meta name="theme-color" content="#0B1B36">
     <meta name="format-detection" content="telephone=no">
-    <title>SKY SHOT · NEW VERSION (TEST)</title>
-    <meta name="skyshot-version" content="NEXT · 2026-10-12 14:45">
+    <title>SKY SHOT</title>
+    <meta name="skyshot-version" content="NEXT · 2026-10-15 15:50">
     <meta name="description" content="Make trick shots from the backyard to the skyline.">
     <!-- Share metadata: the owner shares this link with friends (Open Graph / Twitter; the image URL must be absolute). -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Sky Shot">
-    <meta property="og:title" content="SKY SHOT · NEW VERSION (TEST)">
+    <meta property="og:title" content="SKY SHOT">
     <meta property="og:description" content="Make trick shots from the backyard to the skyline.">
-    <meta property="og:url" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/next/">
+    <meta property="og:url" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/">
     <meta property="og:image" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/share.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Sky Shot: a basketball falling 2,500 ft toward a tiny park court far below.">
     <meta property="og:image:type" content="image/png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="SKY SHOT · NEW VERSION (TEST)">
+    <meta name="twitter:title" content="SKY SHOT">
     <meta name="twitter:description" content="Make trick shots from the backyard to the skyline.">
     <meta name="twitter:image" content="https://mdhalbert07-cpu.github.io/Sky-Shot/play/share.png">
     <meta name="twitter:image:alt" content="Sky Shot: a basketball falling 2,500 ft toward a tiny park court far below.">
@@ -113,20 +112,6 @@
           border-radius: 46px;
           border: 10px solid #050c19;
           box-shadow: 0 0 0 2px #2a4570, 0 30px 80px rgba(0, 0, 0, 0.55);
-        }
-        #frame::after {
-          /* The Dynamic Island, purely decorative. */
-          content: "";
-          position: absolute;
-          top: 1.4%;
-          left: 50%;
-          width: 30%;
-          height: 2.6%;
-          transform: translateX(-50%);
-          border-radius: 999px;
-          background: #000;
-          pointer-events: none;
-          z-index: 5;
         }
       }
 
@@ -238,12 +223,9 @@
         z-index: 7;
       }
     </style>
-      <meta name="skyshot-channel" content="next">
-  <style>#unity-canvas{height:calc(100% - 20px - env(safe-area-inset-bottom,0px));}</style>
-</head>
+  </head>
   <body>
     <div id="frame">
-      <div id="skyshot-next-build" aria-label="SKY SHOT · NEW VERSION (TEST)" data-build-version="NEXT · 2026-10-12 14:45" style="position:absolute;left:0;right:0;bottom:0;height:calc(20px + env(safe-area-inset-bottom,0px));box-sizing:border-box;padding-bottom:env(safe-area-inset-bottom,0px);z-index:8;pointer-events:none;text-align:center;background:#0B1B36;color:#38E1FF;font:700 10px/20px Arial,sans-serif;letter-spacing:.3px;">NEXT · 2026-10-12 14:45 · TEST</div>
       <canvas id="unity-canvas" tabindex="-1"></canvas>
 
       <div id="loader" class="overlay">
@@ -341,9 +323,9 @@
 
         var config = {
           arguments: [],
-          dataUrl: "Build/234bb8d94f226ec0a586c7705bfa1ed5.data.unityweb",
-          frameworkUrl: "Build/990213b01f68928a68c098f1a1dbc652.framework.js.unityweb",
-          codeUrl: "Build/484e7dbb9389be107e9398b4e7c6b041.wasm.unityweb",
+          dataUrl: "Build/456616773cf49cf7e6992c47cf0e36f1.data.unityweb",
+          frameworkUrl: "Build/f3dc893ec1c1df2ddf779b28a57cdd12.framework.js.unityweb",
+          codeUrl: "Build/b17b73cd5f791441d99a64599529dcff.wasm.unityweb",
           streamingAssetsUrl: "StreamingAssets",
           companyName: "DefaultCompany",
           productName: "SKY SHOT · SHOT LAB",
@@ -354,7 +336,7 @@
         };
 
         var script = document.createElement("script");
-        script.src = "Build/536206b1eb701c2b3b897bf9b6218ebb.loader.js";
+        script.src = "Build/027b1461c7aab769b682186f1f42adc5.loader.js";
         script.onload = function () {
           createUnityInstance(canvas, config, setProgress).then(function () {
             setProgress(1);
